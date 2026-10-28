@@ -1,0 +1,10 @@
+# Data is too big for GitHub. It is shared on Google Drive instead.
+data/*
+!data/.gitkeep
+
+# Python and Jupyter temporary files
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
