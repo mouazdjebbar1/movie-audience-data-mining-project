@@ -61,7 +61,7 @@ def build_transactions(ratings_df, user_ids, share_threshold=0.10):
     return (shares >= share_threshold).astype(bool).sort_index().sort_index(axis=1)
 
 
-def mine_rules(ratings_df, user_ids, min_support, min_confidence):
+def mine_rules(ratings_df, user_ids, min_support, min_confidence,share_threshold=0.20):
     """Return association rules as text, ordered by decreasing lift.
 
     The five columns are always present, including when no rules exist.
@@ -70,7 +70,7 @@ def mine_rules(ratings_df, user_ids, min_support, min_confidence):
         raise ValueError("min_support must be in (0, 1]")
     if not 0 <= min_confidence <= 1:
         raise ValueError("min_confidence must be in [0, 1]")
-    transactions = build_transactions(ratings_df, user_ids, share_threshold=0.10)
+    transactions = build_transactions(ratings_df, user_ids, share_threshold=share_threshold)
     if transactions.empty or transactions.shape[1] < 2:
         return pd.DataFrame(columns=RULE_COLUMNS)
 
@@ -88,6 +88,4 @@ def mine_rules(ratings_df, user_ids, min_support, min_confidence):
     rules = rules[RULE_COLUMNS].copy()
     for col in ("antecedents", "consequents"):
         rules[col] = rules[col].map(lambda genres: ", ".join(sorted(genres)))
-    return (rules.sort_values(["lift", "confidence", "support", "antecedents", "consequents"],
-                              ascending=[False, False, False, True, True])
-                 .reset_index(drop=True))
+    return (rules.sort_values(["lift", "confidence", "support", "antecedents", "consequents"], ascending=[False, False, False, True, True]).reset_index(drop=True))
