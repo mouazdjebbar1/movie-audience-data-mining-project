@@ -5,7 +5,7 @@ DSAI 4102 – Applied Data Mining, Fall 2026, UDST
 Group: Mouaz Djebbar, Mohid Intikhab, Abdallah Dahmani
 
 ## Dataset
-MovieLens 32M from GroupLens: https://grouplens.org/datasets/movielens/32m/
+MovieLens 32M from GroupLens: https://www.kaggle.com/datasets/justsahil/movielens-32m?resource=download
 Download `ml-32m.zip`, unzip it, and put `ratings.csv` and `movies.csv` in the `data/` folder.
 Then run the notebooks in order (see below). They create all the data files in `data/` (cleaned ratings, profiles, cluster labels, rules).
 The `data/` folder is not uploaded to GitHub because the files are too big.
